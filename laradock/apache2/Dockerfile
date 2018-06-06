@@ -1,4 +1,4 @@
-FROM webdevops/apache:ubuntu-16.04
+FROM webdevops/apache:centos-7
 
 LABEL maintainer="Eric Pfeiffer <computerfr33k@users.noreply.github.com>"
 
@@ -15,9 +15,10 @@ ENV WEB_PHP_TIMEOUT=${PHP_UPSTREAM_TIMEOUT}
 
 EXPOSE 80 443
 
+RUN mkdir -p /var/www/html
 WORKDIR /var/www/
 
-COPY vhost.conf /etc/apache2/sites-enabled/vhost.conf
+COPY httpd.conf /etc/httpd/conf/httpd.conf
 
 ENTRYPOINT ["/opt/docker/bin/entrypoint.sh"]
 
